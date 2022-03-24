@@ -10,12 +10,13 @@ headersList = {
     "Authorization": "Basic YmV0ZXN0ZXJqaXJhMDFAeWFuZGV4LnJ1OjBQbVpKbjVlS3Nhd3NvZHAwRllRODdEMg==",
 }
 # >------------ json data for creating Issue with POST method ------------- #
+summary_issue = "Create_issue_MX_HM"
 json_post = {
     "fields": {
         "project": {
             "key": "TAB"
         },
-        "summary": "Create_issue_MX_HM",
+        "summary": summary_issue,
         "description": {
             "type": "doc",
             "version": 1,
@@ -46,16 +47,18 @@ def key_tab():
     def response():
         response = requests.get(urlGet, headers=headersList)
         return response
-
+    # > try if there is new issue created to get the key
+    # > otherwise get the key from the last created issue with name: summary_issue
     try:
         print(pytest.key)
         key = pytest.key
     except AttributeError:
-        urlGet = f"https://betesterapi.atlassian.net//rest/api/2/search?jql=project%20%3D%20TAB%20AND%20text%20~%20%22MX_HM%22"
+        urlGet = f"https://betesterapi.atlassian.net//rest/api/2/search?jql=project%20%3D%20TAB%20AND%20text%20~%20%22{summary_issue}%22"
         print("\nno new key")
         response()
         resp = response().json()
-
+        # > try if there is issue with the name: summary_issue to get the key
+        # > othewise print a message (...no key)
         try:
             print(f"key: {(resp['issues'][0]['key'])}")
             key = resp['issues'][0]['key']
