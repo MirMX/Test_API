@@ -10,18 +10,19 @@
 ### Description
 The Homework includes different Steps for testing API using Python with Pytest and Requests Librarys.<br>
 There are four request methods will be using to complete the Task:
-1. __POST__ - create Isssue report,
-2. __GET__ - get Issue Info,
-3. __PUT__ - update Issue report,
-4. __DEL__ - delete Issue report.<br><br>
+1. **POST** - create Isssue report,
+2. **GET** - get Issue Info,
+3. **PUT** - update Issue report,
+4. **DEL** - delete Issue report.<br>
+
 The assignment was designed to improve a Test Automation mastery.<br>
  
 ### Task and Specification/Instruction:
 
 - <details>
-  <summary><b>Issue Report</b></summary>
+  <summary><b>Issue Report </b></summary>
 
-     [Test-Case][1]&nbsp;&nbsp;&nbsp;&nbsp; [![Generic badge](https://img.shields.io/badge/code--coverage-100%25-green)](#)<br>
+     Test-Case ([test_api_jira.py][1])<br>
 
     - <details>
       <summary><b>Instruction:</b> инструкция по выполнению</summary>
@@ -39,6 +40,12 @@ The assignment was designed to improve a Test Automation mastery.<br>
                 • Добавьте тест, что ответ статуса 204
             5. Автоматизируйте все сценарии
       </details>
+    - <details>
+      <summary><b>Logic:</b> логика работы</summary>
+
+        Framework logic:<br>
+        [<img src="https://i.imgur.com/bbnMtWJ.png" />][4]
+      </details>
   </details> 
 ---
 
@@ -50,9 +57,9 @@ The assignment was designed to improve a Test Automation mastery.<br>
     - <details>
       <summary><b>Soft Requirements:</b></summary>
 
-        1. Python 3.8.5
-        2. Pytest 7.0.1
-        3. Request 2.27.1
+        - Python 3.8.5 
+        - Pytest 7.0.1 (to install use `pip install pytest` in terminal)
+        - Request 2.27.1 (to install use `pip install requests` in terminal)
 
       </details>
     - <details>
@@ -62,21 +69,21 @@ The assignment was designed to improve a Test Automation mastery.<br>
         ```PowerShell
         pytest test_api_jira.py -s -v
         ```
-        the key -s is to see print in terminal<br>
-        the key -v is to show more detailed report
+        the key `-s` is to see print in terminal<br>
+        the key `-v` is to show more detailed report
       </details>
 
         - <details>
           <summary><b>to chose which test to run:</b></summary>
 
-            Chose test(s) that shold be skipped if nessesary
-            [<img src="https://i.imgur.com/VJjQzF0.gif"  height="300" />][2]
+            Uncomment `@pytest.mark.skip` to skip test(s)<br>
+            [<img src="https://i.imgur.com/VJjQzF0.gif" />][2]
           </details>
     - <details>
       <summary><b>Results:</b></summary>
 
-        There are 8 tests and each of them has his own result bases on Task Requirements:
-        [<img src="https://i.imgur.com/9K6i8fd.png"  height="300" />][3]
+        There are 8 tests and each of them has his own result bases on Task Requirements:<br>
+        [<img src="https://i.imgur.com/9K6i8fd.png" />][3]
       </details>
   </details> 
 
@@ -84,6 +91,7 @@ The assignment was designed to improve a Test Automation mastery.<br>
 [1]: /test_api_jira.py "Open File in New Tab (ctrl + click)"
 [2]: https://i.imgur.com/VJjQzF0.gif "Open File in New Tab (ctrl + click)"
 [3]: https://i.imgur.com/9K6i8fd.png "Open File in New Tab (ctrl + click)"
+[4]: https://i.imgur.com/bbnMtWJ.png "Open File in New Tab (ctrl + click)"
 <!-- ----------------------------------------------------------------------- -->
 
 ---
