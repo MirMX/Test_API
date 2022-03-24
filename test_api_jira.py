@@ -6,10 +6,8 @@ import requests
 urlPost = "https://betesterapi.atlassian.net/rest/api/3/issue"
 # >---------------------- url for getting current user ----------------------- #
 urlUser = "https://betesterapi.atlassian.net/rest/api/3/myself"
-# >--------------------- headers data for requests --------------------------- #
-headersList = {
-    "Authorization": "Basic YmV0ZXN0ZXJqaXJhMDFAeWFuZGV4LnJ1OjBQbVpKbjVlS3Nhd3NvZHAwRllRODdEMg==",
-}
+# >--------------------- auth data for requests --------------------------- #
+auth_jira = ('betesterjira01@yandex.ru', '0PmZJn5eKsawsodp0FYQ87D2')
 # >---------------- json data to assign issue with PUT method ---------------- #
 json_put = {"accountId": "602d11684890ef0071f6d5b0"}
 
@@ -18,7 +16,7 @@ json_put = {"accountId": "602d11684890ef0071f6d5b0"}
 def key_tab():
 
     def response():
-        response = requests.get(urlGet, headers=headersList)
+        response = requests.get(urlGet, auth=auth_jira)
         return response
     # > try if there is new issue created to get the key
     # > otherwise get the key from the last created issue with name: summary_issue
@@ -52,7 +50,7 @@ def temlpate_get():
     key = key_tab()
     if key is not None:
         urlGet = f"https://betesterapi.atlassian.net/rest/agile/1.0/issue/{key}"
-        response = requests.get(urlGet, headers=headersList)
+        response = requests.get(urlGet, auth=auth_jira)
     else:
         response = None
     return response
@@ -62,7 +60,7 @@ def temlpate_delete():
     key = key_tab()
     if key is not None:
         urlDel = f"https://betesterapi.atlassian.net/rest/api/3/issue/{key}"
-        response = requests.delete(urlDel, headers=headersList)
+        response = requests.delete(urlDel, auth=auth_jira)
     else:
         response = None
     return response
@@ -73,9 +71,9 @@ def temlpate_set_user():
     if key is not None:
         urlSet = f"https://betesterapi.atlassian.net/rest/api/3/issue/{key}/assignee"
         response = requests.put(
-            urlSet, headers=headersList, json=json_put)
+            urlSet, auth=auth_jira, json=json_put)
         urlGet = f"https://betesterapi.atlassian.net/rest/agile/1.0/issue/{key}"
-        response = requests.get(urlGet, headers=headersList)
+        response = requests.get(urlGet, auth=auth_jira)
     else:
         response = None
     return response
@@ -94,7 +92,7 @@ def temlpate_set_user():
 def test_01_create_issue():
     json_post = open("post.json", "r").read()  # > json data for creating Issue
     pytest.post_req = requests.post(
-        urlPost, headers=headersList, json=json.loads(json_post))
+        urlPost, auth=auth_jira, json=json.loads(json_post))
     pytest.key = pytest.post_req.json()['key']    # > get the key issue (TAB-#)
     code = pytest.post_req.status_code
     assert code == 201, 'Status Code Error'
@@ -159,7 +157,7 @@ def test_02_4_issue_type():
 # @pytest.mark.skip
 def test_03_1_get_current_user():
 
-    response = requests.get(urlUser, headers=headersList)
+    response = requests.get(urlUser, auth=auth_jira)
     resp = response.json()
     current_user = resp['displayName']  # > get the user name
     exp_current_user = "Be Tester"
