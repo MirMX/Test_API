@@ -22,7 +22,7 @@ The assignment was designed to improve a Test Automation mastery.<br>
 - <details>
   <summary><b>Issue Report </b></summary>
 
-     Test-Case ([test_api_jira.py][1])<br>
+     Test-Case ([test_api_jira.py][1] + [post.json][5]) in the same folder<br>
 
     - <details>
       <summary><b>Instruction:</b> инструкция по выполнению</summary>
@@ -60,12 +60,13 @@ The assignment was designed to improve a Test Automation mastery.<br>
         - Python 3.8.5 
         - Pytest 7.0.1 (to install use `pip install pytest` in terminal)
         - Request 2.27.1 (to install use `pip install requests` in terminal)
-        - Json 0.9.5 (to install use `pip install json` in terminal)
 
       </details>
     - <details>
       <summary><b>to Run Tests:</b></summary>
 
+        
+        Make sure, Test-Case ([test_api_jira.py][1] + [post.json][5]) **are in the same folder**<br>
         execute code with command below in PowerShell
         ```PowerShell
         pytest test_api_jira.py -s -v
@@ -93,6 +94,7 @@ The assignment was designed to improve a Test Automation mastery.<br>
 [2]: https://i.imgur.com/VJjQzF0.gif "Open File in New Tab (ctrl + click)"
 [3]: https://i.imgur.com/9K6i8fd.png "Open File in New Tab (ctrl + click)"
 [4]: https://i.imgur.com/bbnMtWJ.png "Open File in New Tab (ctrl + click)"
+[5]: /post.json "Open File in New Tab (ctrl + click)"
 <!-- ----------------------------------------------------------------------- -->
 
 ---
