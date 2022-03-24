@@ -25,6 +25,7 @@ def key_tab():
         print(pytest.key)
         key = pytest.key
     except AttributeError:
+        summary_issue = "MX_HM" # issue reports contain the text
         urlGet = f"https://betesterapi.atlassian.net//rest/api/2/search?jql=project%20%3D%20TAB%20AND%20text%20~%20%22{summary_issue}%22"
         print("\nno new key")
         response()
