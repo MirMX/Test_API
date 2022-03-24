@@ -1,3 +1,4 @@
+import json
 import pytest
 import requests
 
@@ -9,37 +10,8 @@ urlUser = "https://betesterapi.atlassian.net/rest/api/3/myself"
 headersList = {
     "Authorization": "Basic YmV0ZXN0ZXJqaXJhMDFAeWFuZGV4LnJ1OjBQbVpKbjVlS3Nhd3NvZHAwRllRODdEMg==",
 }
-# >------------ json data for creating Issue with POST method ------------- #
-summary_issue = "Create_issue_MX_HM"
-json_post = {
-    "fields": {
-        "project": {
-            "key": "TAB"
-        },
-        "summary": summary_issue,
-        "description": {
-            "type": "doc",
-            "version": 1,
-            "content": [
-                {
-                    "type": "paragraph",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": "Steps -->"
-                        }
-                    ]
-                }
-            ]
-        },
-        "issuetype": {
-            "name": "Bug"
-        }
-    }
-}
 # >---------------- json data to assign issue with PUT method ---------------- #
 json_put = {"accountId": "602d11684890ef0071f6d5b0"}
-
 
 # >------------------------- Get Issue Key {TAB-...} ------------------------- #
 def key_tab():
@@ -116,8 +88,9 @@ def temlpate_set_user():
 # ---------------------------------------------------------------------------- #
 # @pytest.mark.skip
 def test_01_create_issue():
+    json_post = open("post.json", "r").read()  # > json data for creating Issue
     pytest.post_req = requests.post(
-        urlPost, headers=headersList, json=json_post)
+        urlPost, headers=headersList, json=json.loads(json_post))
     pytest.key = pytest.post_req.json()['key']    # > get the key issue (TAB-#)
     code = pytest.post_req.status_code
     assert code == 201, 'Status Code Error'

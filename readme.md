@@ -60,6 +60,7 @@ The assignment was designed to improve a Test Automation mastery.<br>
         - Python 3.8.5 
         - Pytest 7.0.1 (to install use `pip install pytest` in terminal)
         - Request 2.27.1 (to install use `pip install requests` in terminal)
+        - Json 0.9.5 (to install use `pip install json` in terminal)
 
       </details>
     - <details>
