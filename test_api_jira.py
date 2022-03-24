@@ -13,6 +13,7 @@ headersList = {
 # >---------------- json data to assign issue with PUT method ---------------- #
 json_put = {"accountId": "602d11684890ef0071f6d5b0"}
 
+
 # >------------------------- Get Issue Key {TAB-...} ------------------------- #
 def key_tab():
 
@@ -25,7 +26,9 @@ def key_tab():
         print(pytest.key)
         key = pytest.key
     except AttributeError:
-        summary_issue = "MX_HM" # issue reports contain the text
+        with open('post.json', 'r') as json_file:
+            json_load = json.load(json_file)
+        summary_issue = json_load['fields']['summary']
         urlGet = f"https://betesterapi.atlassian.net//rest/api/2/search?jql=project%20%3D%20TAB%20AND%20text%20~%20%22{summary_issue}%22"
         print("\nno new key")
         response()
