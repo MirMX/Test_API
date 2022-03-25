@@ -7,7 +7,7 @@ urlPost = "https://betesterapi.atlassian.net/rest/api/3/issue"
 # >---------------------- url for getting current user ----------------------- #
 urlUser = "https://betesterapi.atlassian.net/rest/api/3/myself"
 # >--------------------- auth data for requests --------------------------- #
-auth_jira = ('betesterjira01@yandex.ru', '0PmZJn5eKsawsodp0FYQ87D2')
+auth_jira = ('betesterjira01@yandex.ru', 'H5zlZEVMMa0m6vOgKePUF0A0')
 # >---------------- json data to assign issue with PUT method ---------------- #
 json_put = {"accountId": "602d11684890ef0071f6d5b0"}
 
@@ -23,7 +23,7 @@ def key_tab():
     try:
         print(pytest.key)
         key = pytest.key
-    except AttributeError:
+    except Exception:
         with open('post.json', 'r') as json_file:
             json_load = json.load(json_file)
         summary_issue = json_load['fields']['summary']
@@ -36,8 +36,8 @@ def key_tab():
         try:
             print(f"key: {(resp['issues'][0]['key'])}")
             key = resp['issues'][0]['key']
-        except IndexError:
-            print("There is no issue at this moment and therefore no key")
+        except Exception:
+            print("There is no Issue Report and therefore no key")
             key = None
             return key
     return key
@@ -48,34 +48,35 @@ def key_tab():
 # ---------------------------------------------------------------------------- #
 def temlpate_get():
     key = key_tab()
-    if key is not None:
-        urlGet = f"https://betesterapi.atlassian.net/rest/agile/1.0/issue/{key}"
-        response = requests.get(urlGet, auth=auth_jira)
-    else:
-        response = None
-    return response
-
-
-def temlpate_delete():
-    key = key_tab()
-    if key is not None:
-        urlDel = f"https://betesterapi.atlassian.net/rest/api/3/issue/{key}"
-        response = requests.delete(urlDel, auth=auth_jira)
-    else:
-        response = None
+    # if key is not None:
+    urlGet = f"https://betesterapi.atlassian.net/rest/agile/1.0/issue/{key}"
+    response = requests.get(urlGet, auth=auth_jira)
+    resp = response.status_code
+    print(f"Status code: {resp}")
+    assert resp == 200, 'Status Code Error'
     return response
 
 
 def temlpate_set_user():
     key = key_tab()
-    if key is not None:
-        urlSet = f"https://betesterapi.atlassian.net/rest/api/3/issue/{key}/assignee"
-        response = requests.put(
-            urlSet, auth=auth_jira, json=json_put)
-        urlGet = f"https://betesterapi.atlassian.net/rest/agile/1.0/issue/{key}"
-        response = requests.get(urlGet, auth=auth_jira)
-    else:
-        response = None
+    urlSet = f"https://betesterapi.atlassian.net/rest/api/3/issue/{key}/assignee"
+    response = requests.put(
+        urlSet, auth=auth_jira, json=json_put)
+    resp = response.status_code
+    print(f"Status code: {resp}")
+    assert resp == 204, 'Status Code Error'
+    urlGet = f"https://betesterapi.atlassian.net/rest/agile/1.0/issue/{key}"
+    response = requests.get(urlGet, auth=auth_jira)
+    return response
+
+
+def temlpate_delete():
+    key = key_tab()
+    urlDel = f"https://betesterapi.atlassian.net/rest/api/3/issue/{key}"
+    response = requests.delete(urlDel, auth=auth_jira)
+    resp = response.status_code
+    print(f"Status code: {resp}")
+    assert resp == 204, 'Status Code Error'
     return response
 
 
@@ -93,10 +94,10 @@ def test_01_create_issue():
     json_post = open("post.json", "r").read()  # > json data for creating Issue
     pytest.post_req = requests.post(
         urlPost, auth=auth_jira, json=json.loads(json_post))
-    pytest.key = pytest.post_req.json()['key']    # > get the key issue (TAB-#)
     code = pytest.post_req.status_code
-    assert code == 201, 'Status Code Error'
     print(f"\nStatus code: {code}")
+    assert code == 201, 'Status Code Error'
+    pytest.key = pytest.post_req.json()['key']    # > get the key issue (TAB-#)
 
 
 # ---------------------------------------------------------------------------- #
@@ -158,6 +159,10 @@ def test_02_4_issue_type():
 def test_03_1_get_current_user():
 
     response = requests.get(urlUser, auth=auth_jira)
+    resp = response.status_code
+    print(f"\nStatus code: {resp}")
+    assert resp == 200, 'Status Code Error'
+
     resp = response.json()
     current_user = resp['displayName']  # > get the user name
     exp_current_user = "Be Tester"
@@ -185,8 +190,4 @@ def test_03_2_set_user():
 # ---------------------------------------------------------------------------- #
 # @pytest.mark.skip
 def test_04_delete_issue():
-    response = temlpate_delete()
-    if response != None:
-        code = response.status_code
-        assert code == 204, 'Status Code Error'
-        print(f"\nStatus code: {code}")
+    temlpate_delete()
