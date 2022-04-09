@@ -22,7 +22,7 @@ The assignment was designed to improve a Test Automation mastery.<br>
 - <details>
   <summary><b>Issue Report </b></summary>
 
-     Test-Case ([test_api_jira.py][1] + [post.json][5]) in the same folder<br>
+     Test-Case ([test_api_jira.py][1] + [base_api.py][5] + [data.py][6]) in the same folder<br>
 
     - <details>
       <summary><b>Instruction:</b> инструкция по выполнению</summary>
@@ -66,7 +66,7 @@ The assignment was designed to improve a Test Automation mastery.<br>
       <summary><b>to Run Tests:</b></summary>
 
         
-        Make sure, Test-Case ([test_api_jira.py][1] + [post.json][5]) **are in the same folder**<br>
+        Make sure, Test-Case ([test_api_jira.py][1] + [base_api.py][5] + [data.py][6]) **are in the same folder**<br>
         execute code with command below in PowerShell
         ```PowerShell
         pytest test_api_jira.py -s -v
@@ -79,22 +79,23 @@ The assignment was designed to improve a Test Automation mastery.<br>
           <summary><b>to chose which test to run:</b></summary>
 
             Uncomment `@pytest.mark.skip` to skip test(s)<br>
-            [<img src="https://i.imgur.com/VJjQzF0.gif" />][2]
+            [<img src="https://i.imgur.com/iHvbTfK.gif" />][2]
           </details>
     - <details>
       <summary><b>Results:</b></summary>
 
         There are 8 tests and each of them has his own result bases on Task Requirements:<br>
-        [<img src="https://i.imgur.com/9K6i8fd.png" />][3]
+        [<img src="https://i.imgur.com/Tughzmv.png" />][3]
       </details>
   </details> 
 
 <!-- ----------------------------------------------------------------------- -->
 [1]: /test_api_jira.py "Open File in New Tab (ctrl + click)"
-[2]: https://i.imgur.com/VJjQzF0.gif "Open File in New Tab (ctrl + click)"
-[3]: https://i.imgur.com/9K6i8fd.png "Open File in New Tab (ctrl + click)"
+[2]: https://i.imgur.com/iHvbTfK.gif "Open File in New Tab (ctrl + click)"
+[3]: https://i.imgur.com/Tughzmv.png "Open File in New Tab (ctrl + click)"
 [4]: https://i.imgur.com/bbnMtWJ.png "Open File in New Tab (ctrl + click)"
-[5]: /post.json "Open File in New Tab (ctrl + click)"
+[5]: /base_api.py "Open File in New Tab (ctrl + click)"
+[6]: /data.py "Open File in New Tab (ctrl + click)"
 <!-- ----------------------------------------------------------------------- -->
 
 ---
